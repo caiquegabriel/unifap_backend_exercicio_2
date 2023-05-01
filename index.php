@@ -114,7 +114,55 @@ function questao5($grupos) {
  * #Questao 6 | COD:1071
 */
 function questao6($x, $y) {
-    if ()
+    $impares = [];
+    if ($x < $y) {
+        for ($i = $x+1; $i < $y; $i++) {
+            if ($i % 2 != 0) {
+                $impares[] = $i;
+            }
+        }
+    } else {
+        for ($i = $y+1; $i < $x; $i++) {
+            if ($i % 2 != 0) {
+                $impares[] = $i;
+            }
+        }
+    }
+
+    $sum = array_reduce($impares, function ($sum, $impar) {
+        return $sum += $impar;
+    });
+
+    echo $sum;
 }
 
-questao6(6, -5);
+#questao6(6, -5);
+
+/**
+ * #Questao 7 | COD:1103
+*/
+function questao7(int $h1, int $m1, int $h2, int $m2) {
+    $horas = 0;
+    $minutos = 0;
+    // Outro dia
+    if ($h1 > $h2 || ($h1 == $h2 && $m1 > $m2)) {
+        $horas = abs($h1 - 24) + $h2;
+    } else {
+        // Mesmo dia
+        $horas = abs($h1 - $h2);
+    }
+
+    if ($m1 > $m2) {
+        $horas-= 1;
+        $minutos = abs(($m1 - $m2) - 60);
+    } else {
+        $minutos = abs($m1 - $m2);
+    }
+
+    echo (($horas * 60) + $minutos) . "\n";
+}
+
+questao7("1", "5", "3", "5");
+questao7("23", "59", "0", "34");
+questao7("21", "33", "21", "10");
+// questao7("0", "0", "0", "0");
